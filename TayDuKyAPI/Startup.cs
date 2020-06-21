@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using TayDuKyAPI.Models;
+using TayDuKyAPI.Repository;
+using TayDuKyAPI.Service;
 
 namespace TayDuKyAPI
 {
@@ -33,8 +35,12 @@ namespace TayDuKyAPI
             });
 
             services.AddDbContext<PRM391Context>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("SWD_SlicingPieDB")));
+                opt.UseSqlServer(Configuration.GetConnectionString("PRM391_Final")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
