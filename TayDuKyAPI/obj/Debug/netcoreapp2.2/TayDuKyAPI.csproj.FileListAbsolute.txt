@@ -1,0 +1,17 @@
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\appsettings.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.deps.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.runtimeconfig.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.runtimeconfig.dev.json
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.dll
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.csprojAssemblyReference.cache
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.RazorAssemblyInfo.cache
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.RazorAssemblyInfo.cs
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.AssemblyInfoInputs.cache
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.AssemblyInfo.cs
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.RazorTargetAssemblyInfo.cache
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.pdb
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.dll
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.pdb
+D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\EFCorePluralizer.cs
