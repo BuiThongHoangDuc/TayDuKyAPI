@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TayDuKyAPI.DTOs;
 using TayDuKyAPI.Models;
 using TayDuKyAPI.Service;
 using TayDuKyAPI.ViewModel;
@@ -23,10 +24,10 @@ namespace TayDuKyAPI.Controllers
         }
 
         // GET: api/Login
-        [HttpGet]
-        public async Task<ActionResult<LoginViewModel>> GetUsers(string email, string password)
+        [HttpPost]
+        public async Task<ActionResult<LoginViewModel>> GetUsers(LoginInfoDto loginInfo)
         {
-            var info = await _user.CheckLoginSV(email, password).FirstOrDefaultAsync();
+            var info = await _user.CheckLoginSV(loginInfo.userEmail, loginInfo.userPassword).FirstOrDefaultAsync();
             if (info == null) return NotFound();
             else return Ok(info);
             //return await _context.Users.ToListAsync();
