@@ -9,5 +9,6 @@ namespace TayDuKyAPI.Enums
     {
         public static readonly int NOTAVAILABLE = 0;
         public static readonly int AVAILABLE = 1;
+        public static readonly int INPROCESS = 2;
     }
 }

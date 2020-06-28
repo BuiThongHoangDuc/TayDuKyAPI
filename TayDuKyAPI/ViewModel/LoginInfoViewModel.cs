@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TayDuKyAPI.DTOs
+namespace TayDuKyAPI.ViewModel
 {
-    public class LoginInfoDto
+    public class LoginInfoViewModel
     {
         public string userEmail { get; set; }
         public string userPassword { get; set; }

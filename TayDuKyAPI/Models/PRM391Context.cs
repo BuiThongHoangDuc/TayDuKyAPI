@@ -111,11 +111,17 @@ namespace TayDuKyAPI.Models
 
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
-                entity.Property(e => e.ScenarioDes).HasMaxLength(255);
+                entity.Property(e => e.ScenarioDes)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
-                entity.Property(e => e.ScenarioLocation).HasMaxLength(50);
+                entity.Property(e => e.ScenarioLocation)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.ScenarioName).HasMaxLength(50);
+                entity.Property(e => e.ScenarioName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ScenarioTimeFrom).HasColumnType("datetime");
 
