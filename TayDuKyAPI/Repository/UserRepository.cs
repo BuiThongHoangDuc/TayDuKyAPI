@@ -29,6 +29,7 @@ namespace TayDuKyAPI.Repository
                                 {
                                     UserId = us.UserId,
                                     UserName = us.UserName,
+                                    UserEmail = us.UserEmail,
                                     UserImage = us.UserImage,
                                     UserRole = us.UserRole,
                                 });

@@ -15,3 +15,4 @@ D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\TayDuKyAPI.pdb
 D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.dll
 D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\TayDuKyAPI.pdb
 D:\C#\TayDuKyAPI\TayDuKyAPI\obj\Debug\netcoreapp2.2\EFCorePluralizer.cs
+D:\C#\TayDuKyAPI\TayDuKyAPI\bin\Debug\netcoreapp2.2\libman.json
