@@ -12,5 +12,6 @@ namespace TayDuKyAPI.ViewModel
         public string ScenarioDes { get; set; }
         public string ScenarioLocation { get; set; }
         public string ScenarioImage { get; set; }
+        public int? ScenarioStatus { get; set; }
     }
 }

@@ -39,8 +39,10 @@ namespace TayDuKyAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IScenarioRepository, ScenarioRepository>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IScenarioService, ScenarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -20,6 +20,7 @@ namespace TayDuKyAPI.Models
         public int? ScenarioCastAmout { get; set; }
         public int? ScenarioStatus { get; set; }
         public string ScenarioImage { get; set; }
+        public int? ScenarioIsDelete { get; set; }
 
         public virtual ICollection<ActorRole> ActorRoles { get; set; }
         public virtual ICollection<EquipmentInScenario> EquipmentInScenarios { get; set; }
