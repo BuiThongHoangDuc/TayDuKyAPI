@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TayDuKyAPI.Models;
+using TayDuKyAPI.Service;
+using TayDuKyAPI.ViewModel;
 
 namespace TayDuKyAPI.Controllers
 {
@@ -13,19 +15,30 @@ namespace TayDuKyAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly PRM391Context _context;
+        private readonly IUserService _userService;
 
-        public UsersController(PRM391Context context)
+        public UsersController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<ActorBasicInfoVM>>> SearchUsers(string usName)
         {
+            if (usName == null) return NotFound();
+            var list = await _userService.SearchActorVM(usName).ToListAsync();
+            if (list.Count == 0) return NotFound();
+            else return Ok(list);
+        }
 
-            return await _context.Users.ToListAsync();
+        // GET: api/Users
+        [HttpGet("List")]
+        public async Task<ActionResult<IEnumerable<ActorBasicInfoVM>>> GetUsers()
+        {
+            var list = await _userService.GetListActorVM().ToListAsync();
+            if (list.Count == 0) return NotFound();
+            else return Ok(list);
         }
 
         //// GET: api/Users/5

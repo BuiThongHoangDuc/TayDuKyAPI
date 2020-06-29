@@ -21,10 +21,22 @@ namespace TayDuKyAPI.Service
         {
             return _user.CheckLogin(userEmail, password);
         }
+
+        public IQueryable<ActorBasicInfoVM> GetListActorVM()
+        {
+            return _user.GetListActor();
+        }
+
+        public IQueryable<ActorBasicInfoVM> SearchActorVM(string userName)
+        {
+            return _user.SearchActor(userName.Trim());
+        }
     }
 
     public interface IUserService
     {
         IQueryable<LoginViewModel> CheckLoginSV(string userEmail, string password);
+        IQueryable<ActorBasicInfoVM> GetListActorVM();
+        IQueryable<ActorBasicInfoVM> SearchActorVM(string userName);
     }
 }

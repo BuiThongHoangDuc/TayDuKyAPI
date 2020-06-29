@@ -20,6 +20,7 @@ namespace TayDuKyAPI.Models
         public string UserAdress { get; set; }
         public int UserRole { get; set; }
         public int UserStatus { get; set; }
+        public int? UserIsDelete { get; set; }
 
         public virtual ICollection<ActorRole> ActorRoles { get; set; }
     }

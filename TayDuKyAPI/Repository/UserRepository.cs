@@ -24,7 +24,7 @@ namespace TayDuKyAPI.Repository
         public IQueryable<LoginViewModel> CheckLogin(string userEmail, string password)
         {
             var loginInfo = _context.Users
-                                .Where(us => us.UserEmail.Equals(userEmail) && us.UserPassword.Equals(password) && us.UserStatus.Equals(Status.AVAILABLE))
+                                .Where(us => us.UserEmail.Equals(userEmail) && us.UserPassword.Equals(password) && us.UserIsDelete.Equals(IsDelete.ACTIVE))
                                 .Select(us => new LoginViewModel
                                 {
                                     UserId = us.UserId,
@@ -36,10 +36,39 @@ namespace TayDuKyAPI.Repository
             return loginInfo;
         }
 
+        public IQueryable<ActorBasicInfoVM> GetListActor()
+        {
+            var listActor = _context.Users
+                                    .Where(us => us.UserRole.Equals(Role.USER) && us.UserIsDelete.Equals(IsDelete.ACTIVE))
+                                    .Select(us => new ActorBasicInfoVM
+                                    {
+                                        UserId = us.UserId,
+                                        UserEmail = us.UserEmail,
+                                        UserImage = us.UserImage,
+                                        UserName = us.UserName,
+                                    });
+            return listActor;
+        }
+
+        public IQueryable<ActorBasicInfoVM> SearchActor(string userName)
+        {
+            var listActor = _context.Users
+                                    .Where(us => us.UserName.Contains(userName) && us.UserRole.Equals(Role.USER) && us.UserIsDelete.Equals(IsDelete.ACTIVE))
+                                    .Select(us => new ActorBasicInfoVM
+                                    {
+                                        UserId = us.UserId,
+                                        UserEmail = us.UserEmail,
+                                        UserImage = us.UserImage,
+                                        UserName = us.UserName,
+                                    });
+            return listActor;
+        }
     }
 
     public interface IUserRepository
     {
         IQueryable<LoginViewModel> CheckLogin(string userEmail, string password);
+        IQueryable<ActorBasicInfoVM> GetListActor();
+        IQueryable<ActorBasicInfoVM> SearchActor(string userName);
     }
 }

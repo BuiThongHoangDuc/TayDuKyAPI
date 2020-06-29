@@ -68,8 +68,6 @@ namespace TayDuKyAPI.Models
 
                 entity.Property(e => e.EquipmentDes).HasMaxLength(50);
 
-                entity.Property(e => e.EquipmentImage).HasMaxLength(100);
-
                 entity.Property(e => e.EquipmentName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -141,8 +139,6 @@ namespace TayDuKyAPI.Models
                 entity.Property(e => e.UserEmail)
                     .IsRequired()
                     .HasMaxLength(50);
-
-                entity.Property(e => e.UserImage).HasMaxLength(50);
 
                 entity.Property(e => e.UserName)
                     .IsRequired()
