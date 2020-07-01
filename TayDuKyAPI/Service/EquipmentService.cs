@@ -14,6 +14,12 @@ namespace TayDuKyAPI.Service
         {
             _equipment = equipment;
         }
+
+        public async Task AddEquipmentSV(EquipmentInfoVM equipment)
+        {
+            await _equipment.AddEquipment(equipment);
+        }
+
         public IQueryable<EquipmentBasicVM> GetListEquipmentVM()
         {
             return _equipment.GetListEquipment();
@@ -28,5 +34,6 @@ namespace TayDuKyAPI.Service
     {
         IQueryable<EquipmentBasicVM> GetListEquipmentVM();
         IQueryable<EquipmentBasicVM> SearchListEquipmentVM(string eName);
+        Task AddEquipmentSV(EquipmentInfoVM equipment);
     }
 }

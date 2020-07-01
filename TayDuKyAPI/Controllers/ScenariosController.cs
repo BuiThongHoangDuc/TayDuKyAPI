@@ -40,81 +40,79 @@ namespace TayDuKyAPI.Controllers
             if (listSenario.Count == 0) return NotFound();
             else return Ok(listSenario);
         }
-        
 
-       // GET: api/Scenarios/5
-       // [HttpGet("{id}")]
-       // public async Task<ActionResult<Scenario>> GetScenario(int id)
-       // {
-       //     var scenario = await _context.Scenarios.FindAsync(id);
+        //POST: api/Scenarios
+        [HttpPost]
+        public async Task<ActionResult> AddScenario(ScenarioInfoVM scenario)
+        {
+            await _scenario.AddScenarioVM(scenario);
+            return NoContent();
+        }
 
-       //     if (scenario == null)
-       //     {
-       //         return NotFound();
-       //     }
 
-       //     return scenario;
-       // }
+        // GET: api/Scenarios/5
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Scenario>> GetScenario(int id)
+        // {
+        //     var scenario = await _context.Scenarios.FindAsync(id);
 
-       // PUT: api/Scenarios/5
-       // [HttpPut("{id}")]
-       // public async Task<IActionResult> PutScenario(int id, Scenario scenario)
-       // {
-       //     if (id != scenario.ScenarioId)
-       //     {
-       //         return BadRequest();
-       //     }
+        //     if (scenario == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-       //     _context.Entry(scenario).State = EntityState.Modified;
+        //     return scenario;
+        // }
 
-       //     try
-       //     {
-       //         await _context.SaveChangesAsync();
-       //     }
-       //     catch (DbUpdateConcurrencyException)
-       //     {
-       //         if (!ScenarioExists(id))
-       //         {
-       //             return NotFound();
-       //         }
-       //         else
-       //         {
-       //             throw;
-       //         }
-       //     }
+        // PUT: api/Scenarios/5
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutScenario(int id, Scenario scenario)
+        // {
+        //     if (id != scenario.ScenarioId)
+        //     {
+        //         return BadRequest();
+        //     }
 
-       //     return NoContent();
-       // }
+        //     _context.Entry(scenario).State = EntityState.Modified;
 
-       // POST: api/Scenarios
-       //[HttpPost]
-       // public async Task<ActionResult<Scenario>> PostScenario(Scenario scenario)
-       // {
-       //     _context.Scenarios.Add(scenario);
-       //     await _context.SaveChangesAsync();
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!ScenarioExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
 
-       //     return CreatedAtAction("GetScenario", new { id = scenario.ScenarioId }, scenario);
-       // }
+        //     return NoContent();
+        // }
 
-       // DELETE: api/Scenarios/5
-       // [HttpDelete("{id}")]
-       // public async Task<ActionResult<Scenario>> DeleteScenario(int id)
-       // {
-       //     var scenario = await _context.Scenarios.FindAsync(id);
-       //     if (scenario == null)
-       //     {
-       //         return NotFound();
-       //     }
+        // DELETE: api/Scenarios/5
+        // [HttpDelete("{id}")]
+        // public async Task<ActionResult<Scenario>> DeleteScenario(int id)
+        // {
+        //     var scenario = await _context.Scenarios.FindAsync(id);
+        //     if (scenario == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-       //     _context.Scenarios.Remove(scenario);
-       //     await _context.SaveChangesAsync();
+        //     _context.Scenarios.Remove(scenario);
+        //     await _context.SaveChangesAsync();
 
-       //     return scenario;
-       // }
+        //     return scenario;
+        // }
 
-       // private bool ScenarioExists(int id)
-       // {
-       //     return _context.Scenarios.Any(e => e.ScenarioId == id);
-       // }
+        // private bool ScenarioExists(int id)
+        // {
+        //     return _context.Scenarios.Any(e => e.ScenarioId == id);
+        // }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,30 @@ namespace TayDuKyAPI.Repository
         public ScenarioRepository(PRM391Context context)
         {
             _context = context;
+        }
+
+        public async Task AddScenario(ScenarioInfoVM scenario)
+        {
+            Scenario scenarioModel = new Scenario();
+            scenarioModel.ScenarioName = scenario.ScenarioName;
+            scenarioModel.ScenarioDes = scenario.ScenarioDes;
+            scenarioModel.ScenarioImage = scenario.ScenarioImage;
+            scenarioModel.ScenarioCastAmout = scenario.ScenarioCastAmout;
+            scenarioModel.ScenarioLocation = scenario.ScenarioLocation;
+            scenarioModel.ScenarioTimeFrom = scenario.ScenarioTimeFrom;
+            scenarioModel.ScenarioTimeTo = scenario.ScenarioTimeTo;
+            scenarioModel.ScenarioStatus = Status.AVAILABLE;
+            scenarioModel.ScenarioIsDelete = IsDelete.ACTIVE;
+
+            _context.Scenarios.Add(scenarioModel);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException) {
+                throw;
+            }
+            
         }
 
         public IQueryable<ScenarioBasicInfoVM> GetListScenario()
@@ -52,5 +77,6 @@ namespace TayDuKyAPI.Repository
     {
         IQueryable<ScenarioBasicInfoVM> GetListScenario(); 
         IQueryable<ScenarioBasicInfoVM> SearchByNameScenario(string sName);
+        Task AddScenario(ScenarioInfoVM scenario);
     }
 }

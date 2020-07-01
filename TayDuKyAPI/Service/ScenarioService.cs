@@ -15,6 +15,11 @@ namespace TayDuKyAPI.Service
             _scenario = scenario;
         }
 
+        public async Task AddScenarioVM(ScenarioInfoVM scenario)
+        {
+            await _scenario.AddScenario(scenario);
+        }
+
         public IQueryable<ScenarioBasicInfoVM> GetListScenarioSV()
         {
             return _scenario.GetListScenario();
@@ -30,5 +35,7 @@ namespace TayDuKyAPI.Service
     {
         IQueryable<ScenarioBasicInfoVM> GetListScenarioSV();
         IQueryable<ScenarioBasicInfoVM> SearchByNameScenarioVM(string sName);
+        Task AddScenarioVM(ScenarioInfoVM scenario);
+
     }
 }

@@ -41,6 +41,14 @@ namespace TayDuKyAPI.Controllers
             else return Ok(list);
         }
 
+        //POST: api/Equipments
+        [HttpPost]
+        public async Task<ActionResult> AddEquipment(EquipmentInfoVM equipment)
+        {
+            await _equipment.AddEquipmentSV(equipment);
+            return NoContent();
+        }
+
         //    GET: api/Equipments/5
         //    [HttpGet("{id}")]
         //    public async Task<ActionResult<Equipment>> GetEquipment(int id)

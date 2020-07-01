@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,6 +64,31 @@ namespace TayDuKyAPI.Repository
                                     });
             return listActor;
         }
+
+        public async Task AddActor(ActorInfoVM actor)
+        {
+            User userModel = new User();
+            userModel.UserName = actor.UserName;
+            userModel.UserPassword = actor.UserPassword;
+            userModel.UserImage = actor.UserImage;
+            userModel.UserPhoneNum = actor.UserPhoneNum;
+            userModel.UserEmail = actor.UserEmail;
+            userModel.UserDescription = actor.UserDescription;
+            userModel.UserAdress = actor.UserAdress;
+            userModel.UserRole = Role.USER;
+            userModel.UserStatus = Status.AVAILABLE;
+            userModel.UserIsDelete = IsDelete.ACTIVE;
+
+            _context.Users.Add(userModel);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
     }
 
     public interface IUserRepository
@@ -70,5 +96,7 @@ namespace TayDuKyAPI.Repository
         IQueryable<LoginViewModel> CheckLogin(string userEmail, string password);
         IQueryable<ActorBasicInfoVM> GetListActor();
         IQueryable<ActorBasicInfoVM> SearchActor(string userName);
+        Task AddActor(ActorInfoVM actor);
+
     }
 }

@@ -17,6 +17,11 @@ namespace TayDuKyAPI.Service
             _user = user;
         }
 
+        public async Task AddActorSV(ActorInfoVM actor)
+        {
+            await _user.AddActor(actor);
+        }
+
         public IQueryable<LoginViewModel> CheckLoginSV(string userEmail, string password)
         {
             return _user.CheckLogin(userEmail, password);
@@ -38,5 +43,7 @@ namespace TayDuKyAPI.Service
         IQueryable<LoginViewModel> CheckLoginSV(string userEmail, string password);
         IQueryable<ActorBasicInfoVM> GetListActorVM();
         IQueryable<ActorBasicInfoVM> SearchActorVM(string userName);
+        Task AddActorSV(ActorInfoVM actor);
+
     }
 }

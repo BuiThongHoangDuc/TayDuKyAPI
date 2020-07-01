@@ -41,6 +41,14 @@ namespace TayDuKyAPI.Controllers
             else return Ok(list);
         }
 
+        //POST: api/Users
+        [HttpPost]
+        public async Task<ActionResult> AddActor(ActorInfoVM actor)
+        {
+            await _userService.AddActorSV(actor);
+            return NoContent();
+        }
+
         //// GET: api/Users/5
         //[HttpGet("{id}")]
         //public async Task<ActionResult<User>> GetUser(int id)
