@@ -64,6 +64,10 @@ namespace TayDuKyAPI.Models
             {
                 entity.ToTable("Equipment");
 
+                entity.HasIndex(e => e.EquipmentName)
+                    .HasName("Unique_EquipmentName")
+                    .IsUnique();
+
                 entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
 
                 entity.Property(e => e.EquipmentDes).HasMaxLength(50);
@@ -107,6 +111,10 @@ namespace TayDuKyAPI.Models
             {
                 entity.ToTable("Scenario");
 
+                entity.HasIndex(e => e.ScenarioName)
+                    .HasName("Unique_ScenarioName")
+                    .IsUnique();
+
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
 
                 entity.Property(e => e.ScenarioDes)
@@ -129,6 +137,10 @@ namespace TayDuKyAPI.Models
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
+
+                entity.HasIndex(e => e.UserEmail)
+                    .HasName("Unique_Email")
+                    .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 

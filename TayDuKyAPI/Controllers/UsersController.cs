@@ -45,7 +45,13 @@ namespace TayDuKyAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> AddActor(ActorInfoVM actor)
         {
-            await _userService.AddActorSV(actor);
+            try
+            {
+                await _userService.AddActorSV(actor);
+            }
+            catch (Exception) {
+                return BadRequest();
+            }
             return NoContent();
         }
 

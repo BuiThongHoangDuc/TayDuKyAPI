@@ -31,7 +31,7 @@ namespace TayDuKyAPI.Controllers
             if (list.Count == 0) return NotFound();
             else return Ok(list);
         }
-        
+
         // GET: api/Equipments
         [HttpGet("List")]
         public async Task<ActionResult<IEnumerable<EquipmentBasicVM>>> GetEquipments()
@@ -45,7 +45,11 @@ namespace TayDuKyAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> AddEquipment(EquipmentInfoVM equipment)
         {
-            await _equipment.AddEquipmentSV(equipment);
+            try
+            {
+                await _equipment.AddEquipmentSV(equipment);
+            }
+            catch (Exception) { return BadRequest(); }
             return NoContent();
         }
 

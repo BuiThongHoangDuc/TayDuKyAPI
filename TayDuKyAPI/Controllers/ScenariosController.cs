@@ -45,7 +45,14 @@ namespace TayDuKyAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> AddScenario(ScenarioInfoVM scenario)
         {
-            await _scenario.AddScenarioVM(scenario);
+            try
+            {
+                await _scenario.AddScenarioVM(scenario);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
             return NoContent();
         }
 
