@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,9 +21,28 @@ namespace TayDuKyAPI.Service
             await _scenario.AddScenario(scenario);
         }
 
+        public async Task<bool> DeleteScenarioSV(int id)
+        {
+            try
+            {
+                bool check = await _scenario.DeleteScenario(id);
+                if (check == true) return true;
+                else return false;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
+
         public IQueryable<ScenarioBasicInfoVM> GetListScenarioSV()
         {
             return _scenario.GetListScenario();
+        }
+
+        public IQueryable<ScenarioEditInfoVM> GetScenarioSV(int id)
+        {
+            return _scenario.GetScenario(id);
         }
 
         public IQueryable<ScenarioBasicInfoVM> SearchByNameScenarioVM(string sName)
@@ -36,6 +56,8 @@ namespace TayDuKyAPI.Service
         IQueryable<ScenarioBasicInfoVM> GetListScenarioSV();
         IQueryable<ScenarioBasicInfoVM> SearchByNameScenarioVM(string sName);
         Task AddScenarioVM(ScenarioInfoVM scenario);
+        Task<bool> DeleteScenarioSV(int id);
+        IQueryable<ScenarioEditInfoVM> GetScenarioSV(int id);
 
     }
 }

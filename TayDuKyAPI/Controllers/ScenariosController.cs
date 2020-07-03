@@ -56,20 +56,33 @@ namespace TayDuKyAPI.Controllers
             return NoContent();
         }
 
+        //DELETE: api/Scenarios/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteScenario(int id)
+        {
+            try
+            {
+                var isDelete = await _scenario.DeleteScenarioSV(id);
+                if (isDelete) return NoContent();
+                else return NotFound();
+            }
+            catch (Exception) { return BadRequest(); }
+        }
 
-        // GET: api/Scenarios/5
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<Scenario>> GetScenario(int id)
-        // {
-        //     var scenario = await _context.Scenarios.FindAsync(id);
 
-        //     if (scenario == null)
-        //     {
-        //         return NotFound();
-        //     }
+        //GET: api/Scenarios/5
+         [HttpGet("{id}")]
+        public async Task<ActionResult<ScenarioEditInfoVM>> GetScenario(int id)
+        {
+            var scenario = await _scenario.GetScenarioSV(id).FirstOrDefaultAsync();
 
-        //     return scenario;
-        // }
+            if (scenario == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(scenario);
+        }
 
         // PUT: api/Scenarios/5
         // [HttpPut("{id}")]
@@ -99,22 +112,6 @@ namespace TayDuKyAPI.Controllers
         //     }
 
         //     return NoContent();
-        // }
-
-        // DELETE: api/Scenarios/5
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<Scenario>> DeleteScenario(int id)
-        // {
-        //     var scenario = await _context.Scenarios.FindAsync(id);
-        //     if (scenario == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     _context.Scenarios.Remove(scenario);
-        //     await _context.SaveChangesAsync();
-
-        //     return scenario;
         // }
 
         // private bool ScenarioExists(int id)

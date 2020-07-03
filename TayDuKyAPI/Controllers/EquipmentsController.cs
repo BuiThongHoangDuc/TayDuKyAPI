@@ -53,6 +53,39 @@ namespace TayDuKyAPI.Controllers
             return NoContent();
         }
 
+        //DELETE: api/Equipments/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteEquipment(int id)
+        {
+            try
+            {
+                var isDelete = await _equipment.DeleteEquipmentSV(id);
+                if (isDelete) return NoContent();
+                else return NotFound();
+            }
+            catch (Exception) { return BadRequest(); }
+        }
+
+        // GET: api/Users/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EquipmentInfoVM>> GetEquipment(int id)
+        {
+            var equip = await _equipment.GetEquipmentSV(id).FirstOrDefaultAsync();
+
+            if (equip == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(equip);
+        }
+
+
+        //private bool EquipmentExists(int id)
+        //{
+        //    return _context.Equipments.Any(e => e.EquipmentId == id);
+        //}
+
         //    GET: api/Equipments/5
         //    [HttpGet("{id}")]
         //    public async Task<ActionResult<Equipment>> GetEquipment(int id)
@@ -107,25 +140,6 @@ namespace TayDuKyAPI.Controllers
         //        return CreatedAtAction("GetEquipment", new { id = equipment.EquipmentId }, equipment);
         //    }
 
-        //    DELETE: api/Equipments/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<ActionResult<Equipment>> DeleteEquipment(int id)
-        //    {
-        //        var equipment = await _context.Equipments.FindAsync(id);
-        //        if (equipment == null)
-        //        {
-        //            return NotFound();
-        //        }
 
-        //        _context.Equipments.Remove(equipment);
-        //        await _context.SaveChangesAsync();
-
-        //        return equipment;
-        //    }
-
-        //    private bool EquipmentExists(int id)
-        //    {
-        //        return _context.Equipments.Any(e => e.EquipmentId == id);
-        //    }
     }
 }

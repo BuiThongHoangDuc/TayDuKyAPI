@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,26 @@ namespace TayDuKyAPI.Service
             await _equipment.AddEquipment(equipment);
         }
 
+        public async Task<bool> DeleteEquipmentSV(int id)
+        {
+            try
+            {
+                bool check = await _equipment.DeleteEquipment(id);
+                if (check == true) return true;
+                else return false;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+
+        }
+
+        public IQueryable<EquipmentInfoVM> GetEquipmentSV(int id)
+        {
+            return _equipment.GetEquipment(id);
+        }
+
         public IQueryable<EquipmentBasicVM> GetListEquipmentVM()
         {
             return _equipment.GetListEquipment();
@@ -35,5 +56,9 @@ namespace TayDuKyAPI.Service
         IQueryable<EquipmentBasicVM> GetListEquipmentVM();
         IQueryable<EquipmentBasicVM> SearchListEquipmentVM(string eName);
         Task AddEquipmentSV(EquipmentInfoVM equipment);
+        Task<bool> DeleteEquipmentSV(int id);
+        IQueryable<EquipmentInfoVM> GetEquipmentSV(int id);
+
+
     }
 }

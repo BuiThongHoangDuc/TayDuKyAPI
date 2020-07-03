@@ -42,6 +42,26 @@ namespace TayDuKyAPI.Repository
             
         }
 
+        public async Task<bool> DeleteScenario(int id)
+        {
+            var scenario = await _context.Scenarios.FindAsync(id);
+            if (scenario == null)
+            {
+                return false;
+            }
+            try
+            {
+                scenario.ScenarioIsDelete = IsDelete.ISDELETED;
+                _context.Entry(scenario).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
+
         public IQueryable<ScenarioBasicInfoVM> GetListScenario()
         {
             var listScenario = _context.Scenarios
@@ -57,6 +77,26 @@ namespace TayDuKyAPI.Repository
                                         });
             return listScenario;
         }
+
+        public IQueryable<ScenarioEditInfoVM> GetScenario(int id)
+        {
+            var scenario = _context.Scenarios
+                                    .Where(sc => sc.ScenarioId == id && sc.ScenarioIsDelete == IsDelete.ACTIVE)
+                                    .Select(sc => new ScenarioEditInfoVM
+                                    {
+                                        ScenarioId = sc.ScenarioId,
+                                        ScenarioCastAmout = sc.ScenarioCastAmout,
+                                        ScenarioDes = sc.ScenarioDes,
+                                        ScenarioImage = sc.ScenarioImage,
+                                        ScenarioLocation = sc.ScenarioLocation,
+                                        ScenarioName = sc.ScenarioName,
+                                        ScenarioStatus= sc.ScenarioStatus,
+                                        ScenarioTimeFrom = sc.ScenarioTimeFrom,
+                                        ScenarioTimeTo = sc.ScenarioTimeTo,
+                                    });
+            return scenario;
+        }
+
         public IQueryable<ScenarioBasicInfoVM> SearchByNameScenario(string sName)
         {
             var listScenario = _context.Scenarios
@@ -78,5 +118,9 @@ namespace TayDuKyAPI.Repository
         IQueryable<ScenarioBasicInfoVM> GetListScenario(); 
         IQueryable<ScenarioBasicInfoVM> SearchByNameScenario(string sName);
         Task AddScenario(ScenarioInfoVM scenario);
+        Task<bool> DeleteScenario(int id);
+        IQueryable<ScenarioEditInfoVM> GetScenario(int id);
+
+
     }
 }

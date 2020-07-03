@@ -27,6 +27,25 @@ namespace TayDuKyAPI.Service
             return _user.CheckLogin(userEmail, password);
         }
 
+        public async Task<bool> DeleteActorSV(int id)
+        {
+            try
+            {
+                bool check = await _user.DeleteActor(id);
+                if (check == true) return true;
+                else return false;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
+
+        public IQueryable<ActorInfoVM> GetActorSV(int id)
+        {
+            return _user.GetActor(id);
+        }
+
         public IQueryable<ActorBasicInfoVM> GetListActorVM()
         {
             return _user.GetListActor();
@@ -44,6 +63,8 @@ namespace TayDuKyAPI.Service
         IQueryable<ActorBasicInfoVM> GetListActorVM();
         IQueryable<ActorBasicInfoVM> SearchActorVM(string userName);
         Task AddActorSV(ActorInfoVM actor);
+        Task<bool> DeleteActorSV(int id);
+        IQueryable<ActorInfoVM> GetActorSV(int id);
 
     }
 }

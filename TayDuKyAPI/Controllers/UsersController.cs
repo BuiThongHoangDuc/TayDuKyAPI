@@ -55,19 +55,32 @@ namespace TayDuKyAPI.Controllers
             return NoContent();
         }
 
-        //// GET: api/Users/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<User>> GetUser(int id)
-        //{
-        //    var user = await _context.Users.FindAsync(id);
+        // DELETE: api/Users/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                var isDelete = await _userService.DeleteActorSV(id);
+                if (isDelete) return NoContent();
+                else return NotFound();
+            }
+            catch (Exception) { return BadRequest(); }
+        }
 
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Users/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ActorInfoVM>> GetUser(int id)
+        {
+            var user = await _userService.GetActorSV(id).FirstOrDefaultAsync();
 
-        //    return user;
-        //}
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
 
         //// PUT: api/Users/5
         //[HttpPut("{id}")]
@@ -109,21 +122,6 @@ namespace TayDuKyAPI.Controllers
         //    return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         //}
 
-        //// DELETE: api/Users/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<User>> DeleteUser(int id)
-        //{
-        //    var user = await _context.Users.FindAsync(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Users.Remove(user);
-        //    await _context.SaveChangesAsync();
-
-        //    return user;
-        //}
 
         //private bool UserExists(int id)
         //{

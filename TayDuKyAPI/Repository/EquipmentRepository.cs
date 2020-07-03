@@ -25,7 +25,7 @@ namespace TayDuKyAPI.Repository
             equipmentModel.EquipmentImage = equipment.EquipmentImage;
             equipmentModel.EquipmentDes = equipment.EquipmentDes;
             equipmentModel.EquipmentQuantity = equipment.EquipmentQuantity;
-            equipmentModel.EquipmentStatus = Status.AVAILABLE ;
+            equipmentModel.EquipmentStatus = Status.AVAILABLE;
             equipmentModel.EquipmentIsDelete = IsDelete.ACTIVE;
 
             _context.Equipments.Add(equipmentModel);
@@ -37,6 +37,41 @@ namespace TayDuKyAPI.Repository
             {
                 throw;
             }
+        }
+
+        public async Task<bool> DeleteEquipment(int id)
+        {
+            var equipment = await _context.Equipments.FindAsync(id);
+            if (equipment == null)
+            {
+                return false;
+            }
+            try
+            {
+                equipment.EquipmentIsDelete = IsDelete.ISDELETED;
+                _context.Entry(equipment).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
+
+        public IQueryable<EquipmentInfoVM> GetEquipment(int id)
+        {
+            var equipment = _context.Equipments
+                                    .Where(equip => equip.EquipmentId == id && equip.EquipmentIsDelete == IsDelete.ACTIVE)
+                                    .Select(eq => new EquipmentInfoVM
+                                    {
+                                        EquipmentId = eq.EquipmentId,
+                                        EquipmentDes = eq.EquipmentDes,
+                                        EquipmentImage = eq.EquipmentImage,
+                                        EquipmentName = eq.EquipmentName,
+                                        EquipmentQuantity = eq.EquipmentQuantity,
+                                    });
+            return equipment;
         }
 
         public IQueryable<EquipmentBasicVM> GetListEquipment()
@@ -74,6 +109,7 @@ namespace TayDuKyAPI.Repository
         IQueryable<EquipmentBasicVM> GetListEquipment();
         IQueryable<EquipmentBasicVM> SearchListEquipment(string eName);
         Task AddEquipment(EquipmentInfoVM equipment);
-
+        Task<bool> DeleteEquipment(int id);
+        IQueryable<EquipmentInfoVM> GetEquipment(int id);
     }
 }

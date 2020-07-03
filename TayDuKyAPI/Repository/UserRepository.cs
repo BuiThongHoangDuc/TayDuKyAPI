@@ -89,6 +89,44 @@ namespace TayDuKyAPI.Repository
                 throw;
             }
         }
+
+        public async Task<bool> DeleteActor(int id)
+        {
+            var actor = await _context.Users.FindAsync(id);
+            if (actor == null)
+            {
+                return false;
+            }
+            try
+            {
+                actor.UserIsDelete = IsDelete.ISDELETED;
+                _context.Entry(actor).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
+
+        public IQueryable<ActorInfoVM> GetActor(int id)
+        {
+            var actor = _context.Users
+                                    .Where(user => user.UserId == id && user.UserIsDelete == IsDelete.ACTIVE)
+                                    .Select(user => new ActorInfoVM
+                                    {
+                                        UserId = user.UserId,
+                                        UserAdress = user.UserAdress,
+                                        UserDescription = user.UserDescription,
+                                        UserEmail = user.UserEmail,
+                                        UserImage = user.UserImage,
+                                        UserName = user.UserName,
+                                        UserPassword = user.UserPassword,
+                                        UserPhoneNum = user.UserPhoneNum,
+                                    });
+            return actor;
+        }
     }
 
     public interface IUserRepository
@@ -97,6 +135,8 @@ namespace TayDuKyAPI.Repository
         IQueryable<ActorBasicInfoVM> GetListActor();
         IQueryable<ActorBasicInfoVM> SearchActor(string userName);
         Task AddActor(ActorInfoVM actor);
-
+        Task<bool> DeleteActor(int id);
+        IQueryable<ActorInfoVM> GetActor(int id);
+        //IQueryable<>
     }
 }
