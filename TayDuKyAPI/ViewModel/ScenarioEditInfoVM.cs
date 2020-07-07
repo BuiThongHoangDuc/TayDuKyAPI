@@ -16,5 +16,6 @@ namespace TayDuKyAPI.ViewModel
         public int? ScenarioCastAmout { get; set; }
         public int? ScenarioStatus { get; set; }
         public string ScenarioImage { get; set; }
+        public string ScenarioScript { get; set; }
     }
 }

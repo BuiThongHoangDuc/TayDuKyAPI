@@ -80,55 +80,26 @@ namespace TayDuKyAPI.Controllers
             return Ok(equip);
         }
 
+        //PUT: api/Equipments/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEquipment(int id, EquipmentInfoVM equipment)
+        {
+            if (id != equipment.EquipmentId)
+            {
+                return BadRequest();
+            }
 
-        //private bool EquipmentExists(int id)
-        //{
-        //    return _context.Equipments.Any(e => e.EquipmentId == id);
-        //}
-
-        //    GET: api/Equipments/5
-        //    [HttpGet("{id}")]
-        //    public async Task<ActionResult<Equipment>> GetEquipment(int id)
-        //    {
-        //        var equipment = await _context.Equipments.FindAsync(id);
-
-        //        if (equipment == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return equipment;
-        //    }
-
-        //    PUT: api/Equipments/5
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> PutEquipment(int id, Equipment equipment)
-        //    {
-        //        if (id != equipment.EquipmentId)
-        //        {
-        //            return BadRequest();
-        //        }
-
-        //        _context.Entry(equipment).State = EntityState.Modified;
-
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!EquipmentExists(id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-
-        //        return NoContent();
-        //    }
+            try
+            {
+                int idUpdate = await _equipment.UpdateEquipmentSV(id, equipment);
+                if (idUpdate == -1) return NotFound();
+                else return Ok(id);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
         //    POST: api/Equipments
         //   [HttpPost]

@@ -50,6 +50,11 @@ namespace TayDuKyAPI.Service
         {
             return _equipment.SearchListEquipment(eName.Trim());
         }
+
+        public Task<int> UpdateEquipmentSV(int id, EquipmentInfoVM equipment)
+        {
+            return _equipment.UpdateEquipment(id, equipment);
+        }
     }
     public interface IEquipmentService
     {
@@ -58,7 +63,7 @@ namespace TayDuKyAPI.Service
         Task AddEquipmentSV(EquipmentInfoVM equipment);
         Task<bool> DeleteEquipmentSV(int id);
         IQueryable<EquipmentInfoVM> GetEquipmentSV(int id);
-
+        Task<int> UpdateEquipmentSV(int id, EquipmentInfoVM equipment);
 
     }
 }

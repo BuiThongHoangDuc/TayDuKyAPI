@@ -50,6 +50,11 @@ namespace TayDuKyAPI.Service
             sName = sName.Trim();
             return _scenario.SearchByNameScenario(sName);
         }
+
+        public Task<int> UpdateScenarioVM(int id, ScenarioEditInfoVM scenario)
+        {
+            return _scenario.UpdateScenario(id, scenario);
+        }
     }
     public interface IScenarioService
     {
@@ -58,6 +63,6 @@ namespace TayDuKyAPI.Service
         Task AddScenarioVM(ScenarioInfoVM scenario);
         Task<bool> DeleteScenarioSV(int id);
         IQueryable<ScenarioEditInfoVM> GetScenarioSV(int id);
-
+        Task<int> UpdateScenarioVM(int id, ScenarioEditInfoVM scenario);
     }
 }

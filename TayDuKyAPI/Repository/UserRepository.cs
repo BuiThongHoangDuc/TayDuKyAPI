@@ -127,6 +127,35 @@ namespace TayDuKyAPI.Repository
                                     });
             return actor;
         }
+
+        public async Task<int> UpdateActor(int id, ActorInfoVM actor)
+        {
+            User user = await _context.Users.FindAsync(id);
+            if (user == null) return -1;
+            user.UserName = actor.UserName;
+            user.UserPassword = actor.UserPassword;
+            user.UserPhoneNum = actor.UserPhoneNum;
+            user.UserImage = actor.UserImage;
+            user.UserEmail = actor.UserEmail;
+            user.UserDescription = actor.UserDescription;
+            user.UserAdress = actor.UserAdress;
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return user.UserId;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return -1;
+                }
+                else throw;
+            }
+        }
     }
 
     public interface IUserRepository
@@ -137,6 +166,6 @@ namespace TayDuKyAPI.Repository
         Task AddActor(ActorInfoVM actor);
         Task<bool> DeleteActor(int id);
         IQueryable<ActorInfoVM> GetActor(int id);
-        //IQueryable<>
+        Task<int> UpdateActor(int id, ActorInfoVM actor);
     }
 }

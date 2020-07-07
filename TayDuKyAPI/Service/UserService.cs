@@ -55,6 +55,11 @@ namespace TayDuKyAPI.Service
         {
             return _user.SearchActor(userName.Trim());
         }
+
+        public Task<int> UpdateActorSV(int id, ActorInfoVM actor)
+        {
+            return _user.UpdateActor(id, actor);
+        }
     }
 
     public interface IUserService
@@ -65,6 +70,7 @@ namespace TayDuKyAPI.Service
         Task AddActorSV(ActorInfoVM actor);
         Task<bool> DeleteActorSV(int id);
         IQueryable<ActorInfoVM> GetActorSV(int id);
+        Task<int> UpdateActorSV(int id, ActorInfoVM actor);
 
     }
 }

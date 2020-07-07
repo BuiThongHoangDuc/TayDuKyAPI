@@ -103,6 +103,37 @@ namespace TayDuKyAPI.Repository
                                             });
             return listEquipment;
         }
+
+        public async Task<int> UpdateEquipment(int id, EquipmentInfoVM equipment)
+        {
+            Equipment equipmentModel = await _context.Equipments.FindAsync(id);
+            if (equipmentModel == null) return -1;
+            equipmentModel.EquipmentName = equipment.EquipmentName;
+            equipmentModel.EquipmentQuantity = equipment.EquipmentQuantity;
+            equipmentModel.EquipmentImage = equipment.EquipmentImage;
+            equipmentModel.EquipmentDes = equipment.EquipmentDes;
+
+            _context.Entry(equipmentModel).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return equipmentModel.EquipmentId;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EquipmentExists(id))
+                {
+                    return -1;
+                }
+                else throw;
+            }
+        }
+
+        private bool EquipmentExists(int id)
+        {
+            return _context.Equipments.Any(e => e.EquipmentId == id);
+        }
     }
     public interface IEquipmentRepository
     {
@@ -111,5 +142,6 @@ namespace TayDuKyAPI.Repository
         Task AddEquipment(EquipmentInfoVM equipment);
         Task<bool> DeleteEquipment(int id);
         IQueryable<EquipmentInfoVM> GetEquipment(int id);
+        Task<int> UpdateEquipment(int id, EquipmentInfoVM equipment);
     }
 }

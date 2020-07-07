@@ -71,7 +71,7 @@ namespace TayDuKyAPI.Controllers
 
 
         //GET: api/Scenarios/5
-         [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ScenarioEditInfoVM>> GetScenario(int id)
         {
             var scenario = await _scenario.GetScenarioSV(id).FirstOrDefaultAsync();
@@ -84,39 +84,25 @@ namespace TayDuKyAPI.Controllers
             return Ok(scenario);
         }
 
-        // PUT: api/Scenarios/5
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutScenario(int id, Scenario scenario)
-        // {
-        //     if (id != scenario.ScenarioId)
-        //     {
-        //         return BadRequest();
-        //     }
+        //PUT: api/Scenarios/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult<int>> PutScenario(int id, ScenarioEditInfoVM scenario)
+        {
+            if (id != scenario.ScenarioId)
+            {
+                return BadRequest();
+            }
 
-        //     _context.Entry(scenario).State = EntityState.Modified;
+            try
+            {
+                int idUpdate = await _scenario.UpdateScenarioVM(id, scenario);
+                if (idUpdate == -1) return NotFound();
+                else return Ok(id);
+            }
+            catch (Exception) {
+                return BadRequest();
+            }
 
-        //     try
-        //     {
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!ScenarioExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
-
-        //     return NoContent();
-        // }
-
-        // private bool ScenarioExists(int id)
-        // {
-        //     return _context.Scenarios.Any(e => e.ScenarioId == id);
-        // }
+        }
     }
 }

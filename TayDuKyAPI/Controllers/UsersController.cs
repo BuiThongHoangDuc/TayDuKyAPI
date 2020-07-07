@@ -82,35 +82,26 @@ namespace TayDuKyAPI.Controllers
             return Ok(user);
         }
 
-        //// PUT: api/Users/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutUser(int id, User user)
-        //{
-        //    if (id != user.UserId)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Users/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult<int>> PutUser(int id, ActorInfoVM user)
+        {
+            if (id != user.UserId)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(user).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!UserExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
+            try
+            {
+                int idUpdate = await _userService.UpdateActorSV(id, user);
+                if (idUpdate == -1) return NotFound();
+                else return Ok(id);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
         //// POST: api/Users
         //[HttpPost]
@@ -120,12 +111,6 @@ namespace TayDuKyAPI.Controllers
         //    await _context.SaveChangesAsync();
 
         //    return CreatedAtAction("GetUser", new { id = user.UserId }, user);
-        //}
-
-
-        //private bool UserExists(int id)
-        //{
-        //    return _context.Users.Any(e => e.UserId == id);
         //}
     }
 }
