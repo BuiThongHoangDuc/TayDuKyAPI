@@ -11,9 +11,17 @@ namespace TayDuKyAPI.Service
     public class ScenarioService : IScenarioService
     {
         private readonly IScenarioRepository _scenario; 
-        public ScenarioService(IScenarioRepository scenario)
+        private readonly IActorInScenarioRepo _ar; 
+        
+        public ScenarioService(IScenarioRepository scenario, IActorInScenarioRepo ar)
         {
             _scenario = scenario;
+            _ar = ar;
+        }
+
+        public Task AddActorInScenarioSV(ActorInScenarioAddVM addModel)
+        {
+            return _ar.AddActorInScenario(addModel);
         }
 
         public async Task AddScenarioVM(ScenarioInfoVM scenario)
@@ -33,6 +41,11 @@ namespace TayDuKyAPI.Service
             {
                 throw;
             }
+        }
+
+        public IQueryable<ActorInScenarioListVM> GetListActorInScenarioSV(int scenarioID)
+        {
+            return _ar.GetListActorInScenario(scenarioID);
         }
 
         public IQueryable<ScenarioBasicInfoVM> GetListScenarioSV()
@@ -64,5 +77,9 @@ namespace TayDuKyAPI.Service
         Task<bool> DeleteScenarioSV(int id);
         IQueryable<ScenarioEditInfoVM> GetScenarioSV(int id);
         Task<int> UpdateScenarioVM(int id, ScenarioEditInfoVM scenario);
+        IQueryable<ActorInScenarioListVM> GetListActorInScenarioSV(int scenarioID);
+        Task AddActorInScenarioSV(ActorInScenarioAddVM addModel);
+
+
     }
 }

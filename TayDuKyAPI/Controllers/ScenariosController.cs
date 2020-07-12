@@ -56,6 +56,27 @@ namespace TayDuKyAPI.Controllers
             return NoContent();
         }
 
+
+        //POST: api/Scenarios
+        [HttpPost("{id}/ActorRole")]
+        public async Task<ActionResult> AddActorInScenario(int id, ActorInScenarioAddVM addModel)
+        {
+            if (id != addModel.ScenarioId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _scenario.AddActorInScenarioSV(addModel);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            return NoContent();
+        }
+
         //DELETE: api/Scenarios/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteScenario(int id)
@@ -82,6 +103,15 @@ namespace TayDuKyAPI.Controllers
             }
 
             return Ok(scenario);
+        }
+
+        //GET: api/Scenarios/5/ActorRole
+        [HttpGet("{id}/ActorRole")]
+        public async Task<ActionResult<ScenarioEditInfoVM>> GetListActorRole(int id)
+        {
+            var listActorInSC = await _scenario.GetListActorInScenarioSV(id).ToListAsync();
+            if (listActorInSC.Count == 0) return NotFound();
+            else return Ok(listActorInSC);
         }
 
         //PUT: api/Scenarios/5

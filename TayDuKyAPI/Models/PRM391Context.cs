@@ -45,9 +45,14 @@ namespace TayDuKyAPI.Models
                 entity.Property(e => e.RoleScenarioId).HasColumnName("RoleScenarioID");
 
                 entity.HasOne(d => d.ActorInScenarioNavigation)
-                    .WithMany(p => p.ActorRoles)
+                    .WithMany(p => p.ActorRoleActorInScenarioNavigations)
                     .HasForeignKey(d => d.ActorInScenario)
                     .HasConstraintName("FK_ActorRole_User");
+
+                entity.HasOne(d => d.AdminNavigation)
+                    .WithMany(p => p.ActorRoleAdminNavigations)
+                    .HasForeignKey(d => d.Admin)
+                    .HasConstraintName("FK_ActorRole_User1");
 
                 entity.HasOne(d => d.RoleScenario)
                     .WithMany(p => p.ActorRoles)

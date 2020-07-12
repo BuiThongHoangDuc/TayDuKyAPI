@@ -7,7 +7,8 @@ namespace TayDuKyAPI.Models
     {
         public User()
         {
-            ActorRoles = new HashSet<ActorRole>();
+            ActorRoleActorInScenarioNavigations = new HashSet<ActorRole>();
+            ActorRoleAdminNavigations = new HashSet<ActorRole>();
         }
 
         public int UserId { get; set; }
@@ -22,6 +23,7 @@ namespace TayDuKyAPI.Models
         public int UserStatus { get; set; }
         public int? UserIsDelete { get; set; }
 
-        public virtual ICollection<ActorRole> ActorRoles { get; set; }
+        public virtual ICollection<ActorRole> ActorRoleActorInScenarioNavigations { get; set; }
+        public virtual ICollection<ActorRole> ActorRoleAdminNavigations { get; set; }
     }
 }

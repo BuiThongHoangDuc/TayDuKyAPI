@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TayDuKyAPI.Models
+namespace TayDuKyAPI.ViewModel
 {
-    public partial class ActorRole
+    public class ActorInScenarioAddVM
     {
         public int ActorRoleId { get; set; }
         public int? ActorInScenario { get; set; }
@@ -12,10 +14,5 @@ namespace TayDuKyAPI.Models
         public string ActorRoleDescription { get; set; }
         public DateTime? DateUpdate { get; set; }
         public int? Admin { get; set; }
-
-        public virtual User ActorInScenarioNavigation { get; set; }
-        public virtual User AdminNavigation { get; set; }
-        public virtual RoleScenario RoleScenario { get; set; }
-        public virtual Scenario Scenario { get; set; }
     }
 }
