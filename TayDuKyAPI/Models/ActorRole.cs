@@ -12,6 +12,7 @@ namespace TayDuKyAPI.Models
         public string ActorRoleDescription { get; set; }
         public DateTime? DateUpdate { get; set; }
         public int? Admin { get; set; }
+        public int? IsDelete { get; set; }
 
         public virtual User ActorInScenarioNavigation { get; set; }
         public virtual User AdminNavigation { get; set; }

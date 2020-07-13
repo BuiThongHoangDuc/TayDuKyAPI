@@ -68,13 +68,14 @@ namespace TayDuKyAPI.Controllers
 
             try
             {
-                await _scenario.AddActorInScenarioSV(addModel);
+                var check = await _scenario.AddActorInScenarioSV(addModel);
+                if (check == true) return NoContent();
+                else return Conflict();
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            return NoContent();
         }
 
         //DELETE: api/Scenarios/5
@@ -107,7 +108,7 @@ namespace TayDuKyAPI.Controllers
 
         //GET: api/Scenarios/5/ActorRole
         [HttpGet("{id}/ActorRole")]
-        public async Task<ActionResult<ScenarioEditInfoVM>> GetListActorRole(int id)
+        public async Task<ActionResult<ActorInScenarioListVM>> GetListActorRole(int id)
         {
             var listActorInSC = await _scenario.GetListActorInScenarioSV(id).ToListAsync();
             if (listActorInSC.Count == 0) return NotFound();

@@ -19,9 +19,15 @@ namespace TayDuKyAPI.Service
             _ar = ar;
         }
 
-        public Task AddActorInScenarioSV(ActorInScenarioAddVM addModel)
+        public async Task<bool> AddActorInScenarioSV(ActorInScenarioAddVM addModel)
         {
-            return _ar.AddActorInScenario(addModel);
+            bool check = _ar.FindActorInScenario(addModel).Result;
+            if (check == false)
+            {
+                await _ar.AddActorInScenario(addModel);
+                return true;
+            }
+            else return false;
         }
 
         public async Task AddScenarioVM(ScenarioInfoVM scenario)
@@ -29,6 +35,7 @@ namespace TayDuKyAPI.Service
             await _scenario.AddScenario(scenario);
         }
 
+       
         public async Task<bool> DeleteScenarioSV(int id)
         {
             try
@@ -78,8 +85,7 @@ namespace TayDuKyAPI.Service
         IQueryable<ScenarioEditInfoVM> GetScenarioSV(int id);
         Task<int> UpdateScenarioVM(int id, ScenarioEditInfoVM scenario);
         IQueryable<ActorInScenarioListVM> GetListActorInScenarioSV(int scenarioID);
-        Task AddActorInScenarioSV(ActorInScenarioAddVM addModel);
-
+        Task<bool> AddActorInScenarioSV(ActorInScenarioAddVM addModel);
 
     }
 }

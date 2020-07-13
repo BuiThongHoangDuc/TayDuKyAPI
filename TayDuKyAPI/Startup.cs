@@ -48,6 +48,7 @@ namespace TayDuKyAPI
             services.AddScoped<IScenarioService, ScenarioService>();
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IRoleScenarioService, RoleScenarioService>();
+            services.AddScoped<IActorIInScenarioSV, ActorIInScenarioSV>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
