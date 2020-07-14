@@ -88,9 +88,15 @@ namespace TayDuKyAPI.Models
 
                 entity.ToTable("EquipmentInScenario");
 
+                entity.Property(e => e.CreateByDate).HasColumnType("datetime");
+
                 entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
 
+                entity.Property(e => e.PersonUpdate).HasMaxLength(50);
+
                 entity.Property(e => e.ScenarioId).HasColumnName("ScenarioID");
+
+                entity.Property(e => e.UpdateByDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Equipment)
                     .WithMany(p => p.EquipmentInScenarios)

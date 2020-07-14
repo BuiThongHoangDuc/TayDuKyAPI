@@ -16,10 +16,12 @@ namespace TayDuKyAPI.Controllers
     public class ScenariosController : ControllerBase
     {
         private readonly IScenarioService _scenario;
+        private readonly IEquipmentInScenarioSV _eis;
 
-        public ScenariosController(IScenarioService scenario)
+        public ScenariosController(IScenarioService scenario, IEquipmentInScenarioSV eis)
         {
             _scenario = scenario;
+            _eis = eis;
         }
 
         // GET: api/Scenarios
@@ -115,6 +117,16 @@ namespace TayDuKyAPI.Controllers
             else return Ok(listActorInSC);
         }
 
+
+        //GET: api/Scenarios/5/ActorRole
+        [HttpGet("{id}/EquipmentInScenario")]
+        public async Task<ActionResult<ActorInScenarioListVM>> GetListEquipmentInSC(int id)
+        {
+            var listEquipmentInSC = await _eis.GetListEquipmentInScenarioSV(id).ToListAsync();
+            if (listEquipmentInSC.Count == 0) return NotFound();
+            else return Ok(listEquipmentInSC);
+        }
+
         //PUT: api/Scenarios/5
         [HttpPut("{id}")]
         public async Task<ActionResult<int>> PutScenario(int id, ScenarioEditInfoVM scenario)
@@ -134,6 +146,38 @@ namespace TayDuKyAPI.Controllers
                 return BadRequest();
             }
 
+        }
+
+        [HttpPost("{id}/EquipmentInScenario")]
+        public async Task<ActionResult> AddEquipmentISC(int id, EquipInScenarioAddModel addModel)
+        {
+            //if (id != addModel.ScenarioId)
+            //{
+            //    return BadRequest();
+            //}
+
+            //try
+            //{
+            //    await _eis.AddEquipmentInScenarioSV(addModel);
+            //}
+            //catch (Exception) { return BadRequest(); }
+            //return NoContent();
+
+            if (id != addModel.ScenarioId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var check = await _eis.AddEquipmentInScenarioSV(addModel);
+                if (check == true) return NoContent();
+                else return Conflict();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
