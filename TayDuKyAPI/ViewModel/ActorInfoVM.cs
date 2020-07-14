@@ -15,5 +15,8 @@ namespace TayDuKyAPI.ViewModel
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public string UserAdress { get; set; }
+        public string UserCreateBy { get; set; }
+        public DateTime? UserUpdateTime { get; set; }
+        public string UserUpdateBy { get; set; }
     }
 }

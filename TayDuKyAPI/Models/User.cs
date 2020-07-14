@@ -22,6 +22,9 @@ namespace TayDuKyAPI.Models
         public int UserRole { get; set; }
         public int UserStatus { get; set; }
         public int? UserIsDelete { get; set; }
+        public string UserCreateBy { get; set; }
+        public DateTime? UserUpdateTime { get; set; }
+        public string UserUpdateBy { get; set; }
 
         public virtual ICollection<ActorRole> ActorRoleActorInScenarioNavigations { get; set; }
         public virtual ICollection<ActorRole> ActorRoleAdminNavigations { get; set; }

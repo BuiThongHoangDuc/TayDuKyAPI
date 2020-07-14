@@ -151,6 +151,8 @@ namespace TayDuKyAPI.Models
 
                 entity.Property(e => e.UserAdress).HasMaxLength(100);
 
+                entity.Property(e => e.UserCreateBy).HasMaxLength(50);
+
                 entity.Property(e => e.UserDescription).HasMaxLength(255);
 
                 entity.Property(e => e.UserEmail)
@@ -168,6 +170,10 @@ namespace TayDuKyAPI.Models
                 entity.Property(e => e.UserPhoneNum)
                     .HasMaxLength(15)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UserUpdateBy).HasMaxLength(50);
+
+                entity.Property(e => e.UserUpdateTime).HasColumnType("datetime");
             });
         }
     }

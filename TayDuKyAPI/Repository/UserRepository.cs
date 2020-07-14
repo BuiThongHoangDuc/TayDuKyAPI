@@ -78,6 +78,9 @@ namespace TayDuKyAPI.Repository
             userModel.UserRole = Role.USER;
             userModel.UserStatus = Status.AVAILABLE;
             userModel.UserIsDelete = IsDelete.ACTIVE;
+            userModel.UserCreateBy = actor.UserCreateBy;
+            userModel.UserUpdateTime = actor.UserUpdateTime;
+            userModel.UserUpdateBy = actor.UserUpdateBy;
 
             _context.Users.Add(userModel);
             try
@@ -124,6 +127,9 @@ namespace TayDuKyAPI.Repository
                                         UserName = user.UserName,
                                         UserPassword = user.UserPassword,
                                         UserPhoneNum = user.UserPhoneNum,
+                                        UserCreateBy = user.UserCreateBy,
+                                        UserUpdateBy = user.UserUpdateBy,
+                                        UserUpdateTime = user.UserUpdateTime
                                     });
             return actor;
         }
@@ -139,6 +145,8 @@ namespace TayDuKyAPI.Repository
             user.UserEmail = actor.UserEmail;
             user.UserDescription = actor.UserDescription;
             user.UserAdress = actor.UserAdress;
+            user.UserUpdateBy = actor.UserUpdateBy;
+            user.UserUpdateTime = actor.UserUpdateTime;
 
             _context.Entry(user).State = EntityState.Modified;
 
