@@ -76,7 +76,7 @@ namespace TayDuKyAPI.Repository
             userModel.UserDescription = actor.UserDescription;
             userModel.UserAdress = actor.UserAdress;
             userModel.UserRole = Role.USER;
-            userModel.UserStatus = Status.AVAILABLE;
+            userModel.UserStatus = Status.INPROCESS;
             userModel.UserIsDelete = IsDelete.ACTIVE;
             userModel.UserCreateBy = actor.UserCreateBy;
             userModel.UserUpdateTime = actor.UserUpdateTime;

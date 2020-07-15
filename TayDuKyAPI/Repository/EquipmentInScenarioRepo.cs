@@ -89,6 +89,7 @@ namespace TayDuKyAPI.Repository
                                                 ScenarioTimeTo = eis.Scenario.ScenarioTimeTo,
                                                 PersonUpdate = eis.PersonUpdate,
                                                 UpdateByDate = eis.UpdateByDate,
+                                                Status = eis.Scenario.ScenarioStatus,
                                             });
             return actorInSC;
         }

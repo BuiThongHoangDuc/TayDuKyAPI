@@ -132,14 +132,65 @@ namespace TayDuKyAPI.Repository
         {
             return _context.ActorRoles.Any(e => e.ActorRoleId == id);
         }
+
+        public IQueryable<ScenarioBasicInfoVM> GetListScenarioIsDone(int id)
+        {
+            var scenarioList = _context.ActorRoles.Where(ar => ar.ActorInScenario == id && ar.Scenario.ScenarioStatus == Status.DONE).Select(ar => new ScenarioBasicInfoVM
+            {
+                ScenarioId = ar.ScenarioId.Value,
+                ScenarioImage = ar.Scenario.ScenarioImage,
+                ScenarioLocation = ar.Scenario.ScenarioLocation,
+                ScenarioName = ar.Scenario.ScenarioName,
+                ScenarioStatus = ar.Scenario.ScenarioStatus,
+                ScenarioTimeFrom = ar.Scenario.ScenarioTimeFrom,
+                ScenarioTimeTo = ar.Scenario.ScenarioTimeTo,
+                ScenarioScript = ar.Scenario.ScenarioScript,
+            }).Distinct();
+            return scenarioList;
+        }
+
+        public IQueryable<ScenarioBasicInfoVM> GetListScenarioIsStillAvaliable(int id)
+        {
+            var scenarioList = _context.ActorRoles.Where(ar => ar.ActorInScenario == id && ar.Scenario.ScenarioStatus == Status.INPROCESS).Select(ar => new ScenarioBasicInfoVM
+            {
+                ScenarioId = ar.ScenarioId.Value,
+                ScenarioImage = ar.Scenario.ScenarioImage,
+                ScenarioLocation = ar.Scenario.ScenarioLocation,
+                ScenarioName = ar.Scenario.ScenarioName,
+                ScenarioStatus = ar.Scenario.ScenarioStatus,
+                ScenarioTimeFrom = ar.Scenario.ScenarioTimeFrom,
+                ScenarioTimeTo = ar.Scenario.ScenarioTimeTo,
+                ScenarioScript = ar.Scenario.ScenarioScript,
+            }).Distinct();
+            return scenarioList;
+        }
+
+        public IQueryable<ActorInScenarioListVM> GetListActorInScenarioByID(int actorID, int scenarioID)
+        {
+            var actorInSC = _context.ActorRoles
+                                            .Where(ar => ar.ScenarioId == scenarioID && ar.IsDelete == IsDelete.ACTIVE && ar.ActorInScenario == actorID)
+                                            .Select(ar => new ActorInScenarioListVM
+                                            {
+                                                RoleScenarioId = ar.RoleScenario.RoleScenarioName,
+                                                ActorInScenario = ar.ActorInScenarioNavigation.UserName,
+                                                ActorRoleId = ar.ActorRoleId,
+                                                Admin = ar.AdminNavigation.UserName,
+                                                DateUpdate = ar.DateUpdate,
+                                                ActorEmail = ar.ActorInScenarioNavigation.UserEmail,
+                                            });
+            return actorInSC;
+        }
     }
     public interface IActorInScenarioRepo {
         Task AddActorInScenario(ActorInScenarioAddVM addModel);
         IQueryable<ActorInScenarioListVM> GetListActorInScenario(int scenarioID);
+        IQueryable<ActorInScenarioListVM> GetListActorInScenarioByID(int actorID,int scenarioID);
         Task<bool> FindActorInScenario(ActorInScenarioAddVM addModel);
         Task<bool> DeleteActorInScenario(int actorInScenarioID);
         IQueryable<ActorInScenarioDetail> GetActorInScenarioByID(int id);
         Task<int> UpdateAR(int id, ActorInScenarioAddVM arEditModel);
+        IQueryable<ScenarioBasicInfoVM> GetListScenarioIsStillAvaliable(int id);
+        IQueryable<ScenarioBasicInfoVM> GetListScenarioIsDone(int id);
 
     }
 }

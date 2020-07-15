@@ -42,7 +42,6 @@ namespace TayDuKyAPI.Controllers
             if (listSenario.Count == 0) return NotFound();
             else return Ok(listSenario);
         }
-
         //POST: api/Scenarios
         [HttpPost]
         public async Task<ActionResult> AddScenario(ScenarioInfoVM scenario)
@@ -151,17 +150,6 @@ namespace TayDuKyAPI.Controllers
         [HttpPost("{id}/EquipmentInScenario")]
         public async Task<ActionResult> AddEquipmentISC(int id, EquipInScenarioAddModel addModel)
         {
-            //if (id != addModel.ScenarioId)
-            //{
-            //    return BadRequest();
-            //}
-
-            //try
-            //{
-            //    await _eis.AddEquipmentInScenarioSV(addModel);
-            //}
-            //catch (Exception) { return BadRequest(); }
-            //return NoContent();
 
             if (id != addModel.ScenarioId)
             {

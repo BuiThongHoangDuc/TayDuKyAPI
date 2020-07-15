@@ -28,7 +28,7 @@ namespace TayDuKyAPI.Repository
             scenarioModel.ScenarioLocation = scenario.ScenarioLocation;
             scenarioModel.ScenarioTimeFrom = scenario.ScenarioTimeFrom;
             scenarioModel.ScenarioTimeTo = scenario.ScenarioTimeTo;
-            scenarioModel.ScenarioStatus = Status.AVAILABLE;
+            scenarioModel.ScenarioStatus = Status.INPROCESS;
             scenarioModel.ScenarioIsDelete = IsDelete.ACTIVE;
             scenarioModel.ScenarioScript = scenario.ScenarioScript;
 
@@ -75,10 +75,11 @@ namespace TayDuKyAPI.Repository
                                             ScenarioImage = sc.ScenarioImage,
                                             ScenarioLocation = sc.ScenarioLocation,
                                             ScenarioStatus = sc.ScenarioStatus,
+                                            ScenarioTimeFrom = sc.ScenarioTimeFrom,
+                                            ScenarioTimeTo = sc.ScenarioTimeTo,
                                         });
             return listScenario;
         }
-
         public IQueryable<ScenarioEditInfoVM> GetScenario(int id)
         {
             var scenario = _context.Scenarios
@@ -144,6 +145,8 @@ namespace TayDuKyAPI.Repository
             }
 
         }
+
+
         // public async Task<IActionResult> PutScenario(int id, Scenario scenario)
         // {
         //     if (id != scenario.ScenarioId)
@@ -181,7 +184,7 @@ namespace TayDuKyAPI.Repository
 
     public interface IScenarioRepository
     {
-        IQueryable<ScenarioBasicInfoVM> GetListScenario(); 
+        IQueryable<ScenarioBasicInfoVM> GetListScenario();
         IQueryable<ScenarioBasicInfoVM> SearchByNameScenario(string sName);
         Task AddScenario(ScenarioInfoVM scenario);
         Task<bool> DeleteScenario(int id);

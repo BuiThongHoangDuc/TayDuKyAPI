@@ -30,12 +30,31 @@ namespace TayDuKyAPI.Service
         {
             return _ar.UpdateAR(id, arEditModel);
         }
+
+
+        public IQueryable<ScenarioBasicInfoVM> GetListScenarioIsDoneSV(int id)
+        {
+            return _ar.GetListScenarioIsDone(id);
+        }
+
+        public IQueryable<ScenarioBasicInfoVM> GetListScenarioIsStillAvaliableSV(int id)
+        {
+            return _ar.GetListScenarioIsStillAvaliable(id);
+        }
+
+        public IQueryable<ActorInScenarioListVM> GetListActorInScenarioByIDSV(int actorID, int scenarioID)
+        {
+            return _ar.GetListActorInScenarioByID(actorID, scenarioID);
+        }
     }
     public interface IActorIInScenarioSV
     {
         Task<bool> DeleteActorInScenarioSV(int actorInScenarioID);
         IQueryable<ActorInScenarioDetail> GetActorInScenarioByIDSV(int id);
         Task<int> UpdateARSV(int id, ActorInScenarioAddVM arEditModel);
+        IQueryable<ScenarioBasicInfoVM> GetListScenarioIsStillAvaliableSV(int id);
+        IQueryable<ScenarioBasicInfoVM> GetListScenarioIsDoneSV(int id);
+        IQueryable<ActorInScenarioListVM> GetListActorInScenarioByIDSV(int actorID, int scenarioID);
 
 
     }

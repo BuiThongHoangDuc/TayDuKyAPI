@@ -7,8 +7,7 @@ namespace TayDuKyAPI.Enums
 {
     public class Status
     {
-        public static readonly int NOTAVAILABLE = 0;
-        public static readonly int AVAILABLE = 1;
-        public static readonly int INPROCESS = 2;
+        public static readonly int INPROCESS = 1;
+        public static readonly int DONE = 2;
     }
 }

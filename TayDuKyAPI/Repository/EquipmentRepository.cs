@@ -25,7 +25,7 @@ namespace TayDuKyAPI.Repository
             equipmentModel.EquipmentImage = equipment.EquipmentImage;
             equipmentModel.EquipmentDes = equipment.EquipmentDes;
             equipmentModel.EquipmentQuantity = equipment.EquipmentQuantity;
-            equipmentModel.EquipmentStatus = Status.AVAILABLE;
+            equipmentModel.EquipmentStatus = Status.INPROCESS;
             equipmentModel.EquipmentIsDelete = IsDelete.ACTIVE;
 
             _context.Equipments.Add(equipmentModel);

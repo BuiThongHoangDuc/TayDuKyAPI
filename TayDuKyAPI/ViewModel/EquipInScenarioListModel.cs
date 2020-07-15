@@ -16,5 +16,6 @@ namespace TayDuKyAPI.ViewModel
         public DateTime? ScenarioTimeTo { get; set; }
         public DateTime? UpdateByDate { get; set; }
         public string PersonUpdate { get; set; }
+        public int? Status { get; set; }
     }
 }
